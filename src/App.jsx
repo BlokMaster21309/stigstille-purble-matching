@@ -88,6 +88,8 @@ function App() {
       listChars = characters.slice(0, 5);
     } else if (diff === "Hard") {
       listChars = characters.slice(0, 8);
+    } else if (diff === "Secret") {
+      listChars = characters;
     }
     let extraChars = [];
     for (let i = 0; i < listChars.length; i++) {
@@ -112,10 +114,101 @@ function App() {
         <option value="Easy">Easy</option>
         <option value="Medium">Medium</option>
         <option value="Hard">Hard</option>
+        <option value="Secret">Secret</option>
       </select>
-      <p className="text-white">{shuffled}</p>
+      {/* <p className="text-white">{shuffled}</p> */}
       {difficulty === "Easy" && (
         <div className="grid grid-rows-2 grid-cols-3">
+          {(() => {
+            const items = [];
+            for (let i = 0; i < shuffled.length; i++) {
+              items.push(
+                <div
+                  className="text-white text-center border-2"
+                  id={i}
+                  key={i}
+                  onClick={(p) => {
+                    if (selected[0] == p.target.id) {
+                      return;
+                    }
+                    let tempArr = [];
+                    for (let i = 0; i < selected.length; i++) {
+                      tempArr.push(selected[i]);
+                    }
+                    tempArr.push(p.target.id);
+                    setSelected(tempArr);
+                  }}
+                >
+                  {checkHidden(i)}
+                </div>
+              );
+            }
+            return items;
+          })()}
+        </div>
+      )}
+      {difficulty === "Medium" && (
+        <div className="grid grid-rows-2 grid-cols-5">
+          {(() => {
+            const items = [];
+            for (let i = 0; i < shuffled.length; i++) {
+              items.push(
+                <div
+                  className="text-white text-center border-2"
+                  id={i}
+                  key={i}
+                  onClick={(p) => {
+                    if (selected[0] == p.target.id) {
+                      return;
+                    }
+                    let tempArr = [];
+                    for (let i = 0; i < selected.length; i++) {
+                      tempArr.push(selected[i]);
+                    }
+                    tempArr.push(p.target.id);
+                    setSelected(tempArr);
+                  }}
+                >
+                  {checkHidden(i)}
+                </div>
+              );
+            }
+            return items;
+          })()}
+        </div>
+      )}
+      {difficulty === "Hard" && (
+        <div className="grid grid-rows-4 grid-cols-4">
+          {(() => {
+            const items = [];
+            for (let i = 0; i < shuffled.length; i++) {
+              items.push(
+                <div
+                  className="text-white text-center border-2"
+                  id={i}
+                  key={i}
+                  onClick={(p) => {
+                    if (selected[0] == p.target.id) {
+                      return;
+                    }
+                    let tempArr = [];
+                    for (let i = 0; i < selected.length; i++) {
+                      tempArr.push(selected[i]);
+                    }
+                    tempArr.push(p.target.id);
+                    setSelected(tempArr);
+                  }}
+                >
+                  {checkHidden(i)}
+                </div>
+              );
+            }
+            return items;
+          })()}
+        </div>
+      )}
+      {difficulty === "Secret" && (
+        <div className="grid grid-rows-4 grid-cols-13">
           {(() => {
             const items = [];
             for (let i = 0; i < shuffled.length; i++) {
