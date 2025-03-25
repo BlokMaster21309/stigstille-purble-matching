@@ -2,11 +2,38 @@ import { useState } from "react";
 
 function App() {
   const [shuffled, setShuffled] = useState([]);
-  const characters = ["A", "B", "C", "D", "E", "F", "G"];
+  const characters = [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N",
+    "O",
+    "P",
+    "Q",
+    "R",
+    "S",
+    "T",
+    "U",
+    "V",
+    "W",
+    "X",
+    "Y",
+    "Z",
+  ];
   const [difficulty, setDifficulty] = useState("");
   const [selected, setSelected] = useState([]);
 
-  if (selected.length == 2) {
+  const checkSelected = () => {
     let values = [];
     for (let i = 0; i < selected.length; i++) {
       values.push(shuffled[selected[i]]);
@@ -19,9 +46,13 @@ function App() {
       setShuffled(oldShuffled.filter((p) => !(p == "ZZZ")));
     }
     setSelected([]);
+  };
+  if (selected.length === 2) {
+    // wait a little before checking the options
+    setTimeout(() => {
+      checkSelected();
+    }, 500);
   }
-
-  console.log(selected);
   const checkHidden = (i) => {
     let shown = "hidden";
     for (let j = 0; j < selected.length; j++) {
@@ -52,11 +83,11 @@ function App() {
     setDifficulty(diff);
     let listChars = [];
     if (diff === "Easy") {
-      listChars = characters.slice(0, 3); // Get first 3 characters
+      listChars = characters.slice(0, 3);
     } else if (diff === "Medium") {
-      listChars = characters.slice(0, 5); // Get first 5 characters
+      listChars = characters.slice(0, 5);
     } else if (diff === "Hard") {
-      listChars = characters.slice(0, 7); // Get all characters
+      listChars = characters.slice(0, 8);
     }
     let extraChars = [];
     for (let i = 0; i < listChars.length; i++) {
@@ -103,10 +134,6 @@ function App() {
                     }
                     tempArr.push(p.target.id);
                     setSelected(tempArr);
-                    console.log(p.target);
-                    console.log(p.target.id);
-                    p.target.className = "text-green-200 text-center border-2";
-                    // checkSelected();
                   }}
                 >
                   {checkHidden(i)}
