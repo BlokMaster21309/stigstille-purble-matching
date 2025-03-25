@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function App() {
   const [shuffled, setShuffled] = useState([]);
   const characters = ["A", "B", "C", "D", "E", "F", "G"];
   const [difficulty, setDifficulty] = useState("");
-
   const [selected, setSelected] = useState([]);
 
   if (selected.length == 2) {
@@ -21,6 +20,17 @@ function App() {
     }
     setSelected([]);
   }
+
+  console.log(selected);
+  const checkHidden = (i) => {
+    let shown = "hidden";
+    for (let j = 0; j < selected.length; j++) {
+      if (i == selected[j]) {
+        shown = shuffled[i];
+      }
+    }
+    return shown;
+  };
 
   // shuffle function from https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 
@@ -93,12 +103,13 @@ function App() {
                     }
                     tempArr.push(p.target.id);
                     setSelected(tempArr);
+                    console.log(p.target);
                     console.log(p.target.id);
                     p.target.className = "text-green-200 text-center border-2";
                     // checkSelected();
                   }}
                 >
-                  {shuffled[i]}
+                  {checkHidden(i)}
                 </div>
               );
             }
